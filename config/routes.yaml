@@ -1,0 +1,14 @@
+app_vehicles:
+    path: /api/vehicles
+    methods: GET
+    controller: App\Controller\VehicleController::index
+
+app_vehicles_sort:
+    path: /api/vehicles/sort/{sort}
+    methods: GET
+    controller: App\Controller\VehicleController::sort
+    
+app_vehicles_filter:
+    path: /api/vehicles/filter/{filter}
+    methods: GET
+    controller: App\Controller\VehicleController::filterBySelectedValues
