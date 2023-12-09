@@ -94,16 +94,29 @@ class VehicleController extends AbstractController
         $selectedValues = explode(',', $filter);
         $filteredData = [];
         foreach ($data as $vehicle) {
+            
+        }
+
+        foreach ($data as $vehicle) {
             $isZeroKm = in_array('zeroKm', $selectedValues) && $vehicle['kilometer'] == 0;
             $isHybride = in_array('hybride', $selectedValues) && strtolower($vehicle['deliver']) == 'ready';
             
             if ($isZeroKm || $isHybride) {
                 $filteredData[] = $vehicle;
             }
+            
+            if (
+                    in_array($vehicle['brand'], $selectedValues) ||
+                    in_array($vehicle['model'], $selectedValues) ||
+                    in_array($vehicle['year'], $selectedValues) ||
+                    in_array($vehicle['fuel_type'], $selectedValues)
+                ) {
+                    $filteredData[] = $vehicle;
+                }
         }
+
         if ($filteredData) {
-            $data = [];
-            $data = $filteredData;
+          $data = $filteredData;
         }
         if (in_array('Promotions', $selectedValues)) {
             usort($data, function ($a, $b) {
